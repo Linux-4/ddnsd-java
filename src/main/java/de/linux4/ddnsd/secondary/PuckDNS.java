@@ -46,7 +46,6 @@ public class PuckDNS extends SecondaryDNS {
 			return false;
 		}
 		if (login()) {
-			System.out.println("IF1");
 			HashMap<String, String> parameters = new HashMap<String, String>();
 			parameters.put("domainname", domain);
 			parameters.put("masterip", mode == 1 ? ip : ip6);

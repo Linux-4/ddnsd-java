@@ -37,10 +37,11 @@ public class DDNSD {
 	public static final String V4_API = "http://v4.ident.me";
 	public static final String V6_API = "http://v6.ident.me";
 
-	public static final Path CONFIG = Paths.get("/etc/ddns/ddnsd.ini");
+	public static final Path CONFIG_DIR = Paths.get("/etc/ddns/");
+	public static final Path CONFIG = Paths.get(CONFIG_DIR.toString(), "ddnsd.ini");
 	public static final int CONFIG_VERSION = 1;
-	public static final Path OLDIP = Paths.get("/etc/ddns/.oldip.ddns");
-	public static final Path OLDIP6 = Paths.get("/etc/ddns/.oldip6.ddns");
+	public static final Path OLDIP = Paths.get(CONFIG_DIR.toString(), ".oldip.ddns");
+	public static final Path OLDIP6 = Paths.get(CONFIG_DIR.toString(), ".oldip6.ddns");
 
 	public static final DateTimeFormatter DATE = DateTimeFormatter.ofPattern("yyyyMMdd");
 
