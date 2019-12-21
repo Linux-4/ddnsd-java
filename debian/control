@@ -2,11 +2,11 @@ Source: ddnsd-java
 Section: utils
 Priority: optional
 Maintainer: Tim Zimmermann <tim.zimmermann@linux4.de>
-Build-Depends: maven, java-compiler
+Build-Depends: maven, java8-sdk-headless
 Standards-Version: 3.9.8
 
 Package: ddnsd-java
-Depends: default-jre-headless (>=2:1.8), systemd
+Depends: java8-runtime-headless, systemd
 Architecture: all
 Section: utils
 Priority: optional

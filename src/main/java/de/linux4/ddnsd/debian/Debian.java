@@ -13,7 +13,7 @@ public class Debian {
 	public static final String SECTION = "utils";
 	public static final String PRIORITY = "optional";
 	public static final String MAINTAINER = "Tim Zimmermann <tim.zimmermann@linux4.de>";
-	public static final String DEPENDS = "default-jre-headless (>=2:1.8), systemd";
+	public static final String DEPENDS = "java8-runtime-headless, systemd";
 	public static final String DOWNLOAD_SIZE = "1.8M";
 	public static final String INSTALLED_SIZE = "2.2M";
 	public static final String DESCRIPTION = "DDNSD is a background service to dynamically update your IP-Adress in a DNS Zone file. It is compatible with most linux / unix based operating systems.";
