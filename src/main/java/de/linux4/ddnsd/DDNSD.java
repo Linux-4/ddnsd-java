@@ -23,6 +23,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
@@ -203,7 +204,7 @@ public class DDNSD {
 		}
 	}
 
-	private void updateIP(String oldip, String ip, String[] zones, boolean updateSerial) throws IOException {
+	public static void updateIP(String oldip, String ip, String[] zones, boolean updateSerial) throws IOException {
 		for (String zone : zones) {
 			String[] broken = zone.split(":");
 			String domain = broken[0];
@@ -212,7 +213,7 @@ public class DDNSD {
 			if (file.exists()) {
 				String serial = getSerial(domain);
 				String zoneContent = IO.getContent(file);
-				zoneContent.replaceAll(oldip, ip);
+				zoneContent = zoneContent.replaceAll(Pattern.quote(oldip), ip);
 
 				if (updateSerial) {
 					if (serial.length() == 10) {
@@ -232,7 +233,7 @@ public class DDNSD {
 							newSerial = now + "01";
 						}
 
-						zoneContent.replaceFirst(serial, newSerial);
+						zoneContent = zoneContent.replaceFirst(Pattern.quote(serial), newSerial);
 					} else {
 						System.err.println("Serial of domain " + domain
 								+ " does not have recommended format of YYYYMMDDVV, trying without updating serial");
@@ -250,7 +251,7 @@ public class DDNSD {
 		IO.write(config.toFile(), IO.getContent(DDNSD.class.getResourceAsStream("ddnsd.ini")));
 	}
 
-	private String getSerial(String domain) {
+	private static String getSerial(String domain) {
 		try {
 			InitialDirContext iDirC = new InitialDirContext();
 			Attributes attributes = iDirC.getAttributes("dns:/" + domain, new String[] { "SOA" });
